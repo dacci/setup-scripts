@@ -11,7 +11,7 @@ switch ($Env:PROCESSOR_ARCHITECTURE) {
 }
 
 # Find Microsoft.UI.Xaml.2.8 asset
-$Releases = Get-Releases microsoft/microsoft-ui-xaml | Where-Object tag_name -Like v2.8.*
+$Releases = Get-Releases microsoft/microsoft-ui-xaml | Where-Object tag_name -Like v2.8.* | Where-Object assets -NE $null
 $XamlAsset = $Releases[0].assets | Where-Object name -Like *.$Arch.appx
 
 # Find Windows Terminal asset

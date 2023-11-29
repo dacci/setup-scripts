@@ -14,7 +14,7 @@ switch ($Env:PROCESSOR_ARCHITECTURE) {
 Add-AppxPackage "https://aka.ms/Microsoft.VCLibs.$Arch.14.00.Desktop.appx"
 
 # Install Microsoft.UI.Xaml.2.7
-$Releases = Get-Releases microsoft/microsoft-ui-xaml | Where-Object tag_name -Like v2.7.*
+$Releases = Get-Releases microsoft/microsoft-ui-xaml | Where-Object tag_name -Like v2.7.* | Where-Object assets -NE $null
 $Asset = $Releases[0].assets | Where-Object name -Like *.$Arch.appx
 Add-AppxPackage $Asset.browser_download_url
 
