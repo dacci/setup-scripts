@@ -15,7 +15,7 @@ $Releases = Get-Releases microsoft/microsoft-ui-xaml | Where-Object tag_name -Li
 $XamlAsset = $Releases[0].assets | Where-Object name -Like *.$Arch.appx
 
 # Find Windows Terminal asset
-$Releases = Get-Releases microsoft/terminal
+$Releases = Get-Releases microsoft/terminal | Where-Object { $_.assets | Where-Object name -Like *.msixbundle }
 $TerminalAsset = $Releases[0].assets | Where-Object name -Like *.msixbundle
 
 Add-AppxPackage -Path $TerminalAsset.browser_download_url -DependencyPath $XamlAsset.browser_download_url

@@ -5,6 +5,6 @@ function Get-Releases([string] $Repo) {
   (Invoke-RestMethod https://api.github.com/repos/$Repo/releases) | Where-Object prerelease -EQ $False
 }
 
-$Assets = (Get-Releases PowerShell/PowerShell)[0].assets
-$Package = ($Assets | Where-Object name -Like *.msixbundle)[0]
-Add-AppxPackage $Package.browser_download_url
+$Releases = Get-Releases PowerShell/PowerShell | Where-Object { $_.assets | Where-Object name -Like *.msixbundle }
+$Asset = $Releases[0].assets | Where-Object name -Like *.msixbundle
+Add-AppxPackage $Asset.browser_download_url
